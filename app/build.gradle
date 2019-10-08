@@ -1,0 +1,81 @@
+apply plugin: 'com.android.application'
+
+android {
+    useLibrary 'org.apache.http.legacy'
+    compileSdkVersion 28
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude'mozilla/public-suffix-list.txt'
+        exclude 'org/apache/http/client/version.properties'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    defaultConfig {
+        applicationId "com.example.intelligent.appiumexampletest"
+        minSdkVersion 24
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled false
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile ('junit:junit:4.12')
+            {exclude group:'org.openqua.selenium.remote.SessionNotFoundException'}
+
+    implementation ('com.android.support:appcompat-v7:28.0.0')
+            {exclude group:'cglib',module:'cglib'
+                exclude group: 'org.apache.http.auth'
+                exclude group: 'org.apache.httpcomponents'
+                exclude group:'org.apache.http.ContentTooLongException'
+                exclude group:'org.openqua.selenium.remote.SessionNotFoundException'}
+
+    androidTestImplementation ('com.android.support.test.espresso:espresso-core:3.0.2')
+            {exclude group:'cglib',module:'cglib' }
+
+ compile ('org.apache.httpcomponents:httpcore:4.4.4')
+    compile ('org.apache.httpcomponents:httpclient:4.3.6')
+
+    compile ('io.appium:java-client:3.3.0')
+          {
+              exclude group:'commons-collections',module:'commons-collections'
+              exclude group:'cglib',module:'cglib'
+              exclude group: 'org.apache.http.auth.AUTH'
+              exclude group: 'org.apache.http.auth.AuthOption'
+              exclude group: 'org.apache.httpcomponents'
+              exclude group:'org.apache.http.ContentTooLongException'
+              exclude group:'org.openqua.selenium.remote.SessionNotFoundException'
+              exclude group:'org.openqa.selenium.chrome.ChromeDriverService$Builder'
+          }
+
+    testCompile ('org.reactivestreams:reactive-streams-tck:1.0.0')
+            {  exclude group:'org.openqua.selenium.remote.SessionNotFoundException'}
+
+    compile ('com.squareup.okhttp3:okhttp:3.11.0'){
+
+        exclude group: 'org.apache.httpcomponents'
+        exclude group:'org.apache.http.ContentTooLongException'
+        exclude group:'org.openqua.selenium.remote.SessionNotFoundException'}
+
+}
